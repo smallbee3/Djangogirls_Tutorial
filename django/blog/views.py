@@ -24,3 +24,7 @@ def post_list(request):
 
     # 'blog/post_list.html'템플릿 파일을 이용해 HTTP프로토콜
     return render(request, 'blog/post_list.html')
+
+def post_detail(request):
+
+    return render(request, 'blog/post_detail.html')
