@@ -37,6 +37,13 @@ def post_list(request):
     # return render(request, 'blog/post_list.html') -> 아래와 같은 말.
 
 
-def post_detail(request):
+def post_detail(request, pk):
+    # 디버깅 하는 방법
+    # return HttpResponse(pk)
 
-    return render(request, 'blog/post_detail.html')
+    post = Post.objects.get(pk=pk)
+
+    context = {
+        'post': post
+    }
+    return render(request, 'blog/post_detail.html', context)
