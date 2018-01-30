@@ -9,9 +9,9 @@
     <title>DjangoGirls Tutorial</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <!--<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">-->
-    <!--<link rel="stylesheet" href="/static/css/blog.css">-->
-    <!--원래 이런 것이었음.-->
+{#    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">#}
+{#    <link rel="stylesheet" href="/static/css/blog.css">#}
+{#    원래 이런 것이었음.#}
 </head>
 <body>
     <div class="header">
@@ -20,11 +20,14 @@
         </div>
     </div>
     <div class="container">
+{#        {% for post in posts %}#}
+{#        객체 하나이기 때문에 for문이 필요가 없어짐#}
         <div class="post">
             <p class="post-date">published: {{ post.published_date }}</p>
             <h2 class="post-title"><a href="">{{ post.title }}</a></h2>
-            <p class="post-content">{{ post.content|linebreaksbr|truncatewords:30 }}</p>
+            <p class="post-content full">{{ post.content|linebreaksbr }}</p>
         </div>
+{#        {% endfor %}#}
     </div>
 </body>
 </html>

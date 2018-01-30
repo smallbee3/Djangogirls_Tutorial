@@ -35,3 +35,9 @@ h2 {
     max-height: 190px;
     overflow: hidden;
 }
+
+.post > .post-content.full {
+    max-height: initial;
+    overflow: initial;
+    /*여기서는 inherit 보다 initial이라고 쓰는게 더 맞음*/
+}

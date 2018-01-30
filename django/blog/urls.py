@@ -7,14 +7,15 @@ from . import views
 # 절대경로를 권장하지 않음.
 
 urlpatterns = [
-    path('', views.post_list),
+    path('list', views.post_list, name='post-list'),
 
     # 3/
     # 53/
-    #
+    # 53/asdf/ <- X
     # path('detail/', views.post_detail),
-    re_path(r'(?P<pk>\d+)/$', views.post_detail),
-
+    # re_path(r'(?P<pk>\d+)/$', views.post_detail),
+    path('post/<int:pk>/', views.post_detail, name='post-detail'),
+    # 만약 post/라고 바꾸고 싶으면 일일이 다 바꿔야함.
 
     # 숫자가 1개 이상 반복되는 경우를 정규표현으로 구현하되
     # 해당 반복구간을 그룹으로 묶고, 그룹 이름을 'pk'로 지정
