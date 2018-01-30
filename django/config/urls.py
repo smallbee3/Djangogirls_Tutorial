@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     # 모듈명, 블로그라는 패키지안에있는 urls 라는 모듈을 만듦.
+    # '' : admin외에는 모두 'blog.urls'로 보낸다는 의미.
 ]

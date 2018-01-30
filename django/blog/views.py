@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 from django.shortcuts import render
-
+from .models import Post
 
 def post_list(request):
     # 1. 브라우저에서 요청 -> runserver
@@ -22,8 +22,20 @@ def post_list(request):
     # return HttpResponse('Post List')
     # return HttpResponse('<html><body><h1>Post List</h1></body></html>')
 
+    posts = Post.objects.all()
+    # render()함수에 전달할 dict객체 생성
+    context = {
+        'posts' : posts,
+    }
+    return render(
+        request=request,
+        template_name='blog/post_list.html',
+        context=context,
+    )
+
     # 'blog/post_list.html'템플릿 파일을 이용해 HTTP프로토콜
-    return render(request, 'blog/post_list.html')
+    # return render(request, 'blog/post_list.html') -> 아래와 같은 말.
+
 
 def post_detail(request):
 
