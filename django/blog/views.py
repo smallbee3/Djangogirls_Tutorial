@@ -64,3 +64,14 @@ def post_delete(request, pk):
 def redirect_to_list(request):
     return redirect('blog:post-list')
                     # 네이밍 만을 인자로 받고, url은 쓸 수 없음.
+
+
+
+def post_add(request):
+    # localhost:8000/add로 접근시
+    # 이 뷰가 실행되어서 Post add page라는 문구를 보여주도록 urls작성
+
+    #
+    # return HttpResponse('Post add page')
+
+    return render(request, 'blog/post_add.html')

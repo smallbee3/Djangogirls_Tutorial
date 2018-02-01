@@ -11,7 +11,7 @@ from . import views
 
                 # 1) views를 통째로 import 했기 때문에
 urlpatterns = [
-    path('list/', views.post_list, name='post-list'),
+    path('', views.post_list, name='post-list'),
                  # 2) 함수를 호출하는게 아니라 함수 자체를 전달.
                  # 3) 나중에 이 함수가 필요할 때 실행시킬 수 있음.
 
@@ -21,15 +21,20 @@ urlpatterns = [
     # re_path(r'(?P<pk>\d+)/$', views.post_detail),
 
     # path('detail/', views.post_detail),
-    path('post/<int:pk>/', views.post_detail, name='post-detail'),
+    path('<int:pk>/', views.post_detail, name='post-detail'),
     # 만약 post/라고 바꾸고 싶으면 일일이 다 바꿔야함.
-
-
 
     # 숫자가 1개 이상 반복되는 경우를 정규표현으로 구현하되
     # 해당 반복구간을 그룹으로 묶고, 그룹 이름을 'pk'로 지정
     # re.compile(r'(?P<pk>\d+)')
     # path()
+
+
+
+    path('add/', views.post_add, name='post-add'),
+
+
+
 
     path('delete/<int:pk>/', views.post_delete, name='post-delete'),
 
