@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Post detail{% endblock %}
@@ -8,8 +7,9 @@
         <p class="post-date">published: {{ post.published_date }}</p>
         <h2 class="post-title"><a href="">{{ post.title }}</a></h2>
         <p class="post-content full">{{ post.content|linebreaksbr }}</p>
-        <a href="{% url 'blog:post-delete' pk=post.pk %}">
-            <button>delete</button>
-        </a>
+        <form action="{% url 'blog:post-delete' pk=post.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">삭제하기</button>
+        </form>
     </div>
 {% endblock %}

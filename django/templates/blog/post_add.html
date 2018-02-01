@@ -3,11 +3,9 @@
 {% block title %}Post add{% endblock %}
 
 
-
-
 {% block content %}
     <form action="" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
         <div class="form-group">
             <label for="title">제목</label>
             <input id="title" type="text" name="title" type="text" class="form-control" placeholder="글 제목">

@@ -35,8 +35,8 @@ urlpatterns = [
 
 
 
-
-    path('delete/<int:pk>/', views.post_delete, name='post-delete'),
+    # /3/delete/
+    path('<int:pk>/delete/', views.post_delete, name='post-delete'),
 
     path('', redirect_to_list, name='home'),
 

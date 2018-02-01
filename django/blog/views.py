@@ -50,15 +50,29 @@ def post_detail(request, pk):
 
 
 
-def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)
-    post.delete()
+# def post_delete(request, pk):
+#     post = Post.objects.get(pk=pk)
+#     post.delete()
+#
+#     posts = Post.objects.all()
+#     context = {
+#         'posts': posts
+#     }
+#     return render(request, 'blog/post_list.html', context)
 
-    posts = Post.objects.all()
-    context = {
-        'posts': posts
-    }
-    return render(request, 'blog/post_list.html', context)
+
+def post_delete(request, pk):
+
+    if request.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        post.delete()
+
+        return redirect('blog:post-list')
+
+    else:
+         # 요청의 method가 GET일 때
+        return render(request, 'blog/post_detail.html', pk=post.pk)
+
 
 
 def redirect_to_list(request):
@@ -71,7 +85,47 @@ def post_add(request):
     # localhost:8000/add로 접근시
     # 이 뷰가 실행되어서 Post add page라는 문구를 보여주도록 urls작성
 
-    #
+    pass
     # return HttpResponse('Post add page')
+    if request.method == 'POST':
 
-    return render(request, 'blog/post_add.html')
+        # 요청의 method가 POST일 때
+        # HttpResponse로 POST요청에 담겨온
+        # title과 content를 합친 문자열 데이터를 보여줌
+        title = request.POST['title']
+        content = request.POST['content']
+        # return HttpResponse(f'{title} , {content}')
+
+        # ORM을 사용해서 title과 content에 해당하는 Post 생성
+        post = Post.objects.create(
+            author=request.user,
+            title=title,
+            content=content,
+        )
+
+        # return HttpResponse(f'{post.pk} {post.title} {post.content}')
+
+
+        # post-detail이라는 URL name을 가진 뷰로
+        # 리디렉션 요청을 보냄
+        # 이때,  post-detail URL name으로 특정 URL을 만드려면
+        # pk값이 필요하므로 키워드 인수로 해당 값을 넘겨준다.
+        return redirect('blog:post-detail', pk=post.pk)
+                        # 이것 자체가 주소.
+    else:
+        # 요청의 method가 GET일 때
+        return render(request, 'blog/post_add.html')
+
+# 1. post_add페이지를 보여줌 (GET)
+# 2. post_add페이지에서 글 작성 (POST요청)
+# 3. post_add view에서 POST요청에 대한 처리 완료후,
+#    브라우저에는 post-detail(pk=...)에 해당하는 주소로
+#    redirect를 하도록 응답 (301 redirect, URL: /3)
+# 4. 브라우저는 301 redirect코드를 갖는 HTTP response를 받고,
+#    해당 URL로 GET 요청을 보냄
+#    (새로만든 Post의 pk가 3일때) 브라우저는 '/3'주소로 GET요청
+# 5. '/3'주소로 온 요청은 다시 runserver -> Django코드
+#    -> urls.py -> blog/urls.py
+#    -> def post_detail(request, pk)로 도착,
+#       post_detail뷰 처리가 완료된 post_detail.html의 내용을 응답
+#    -> 브라우저는 해당 내용을 보여줌
