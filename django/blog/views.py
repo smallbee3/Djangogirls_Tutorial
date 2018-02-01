@@ -22,7 +22,12 @@ def post_list(request):
     # return HttpResponse('Post List')
     # return HttpResponse('<html><body><h1>Post List</h1></body></html>')
 
-    posts = Post.objects.all()
+
+    # 생성된 순서대로 출력하고 싶을 때
+    posts = Post.objects.order_by('-created_date')
+
+
+    # posts = Post.objects.all()
     # render()함수에 전달할 dict객체 생성
     context = {
         'posts' : posts,
@@ -49,6 +54,25 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', context)
 
 
+def post_edit(request, pk):
+
+    post = Post.objects.get(pk=pk)
+    if request.method == 'POST':
+        post.title = request.POST['title']
+        post.content = request.POST['content']
+        post.save()
+        return redirect('blog:post-detail', pk=pk)
+
+    else:
+        context = {
+            'post' : post,
+        }
+        return render(request, 'blog/post_edit.html', context)
+
+
+
+
+
 
 # def post_delete(request, pk):
 #     post = Post.objects.get(pk=pk)
@@ -63,15 +87,17 @@ def post_detail(request, pk):
 
 def post_delete(request, pk):
 
+    post = Post.objects.get(pk=pk)
     if request.method == 'POST':
-        post = Post.objects.get(pk=pk)
-        post.delete()
-
-        return redirect('blog:post-list')
+        if request.user == post.author:
+            post = Post.objects.get(pk=pk)
+            post.delete()
+            return redirect('blog:post-list')
+        return redirect('blog:post-detail', pk=pk)
 
     else:
          # 요청의 method가 GET일 때
-        return render(request, 'blog/post_detail.html', pk=post.pk)
+        return render(request, 'blog/post_list.html')
 
 
 
