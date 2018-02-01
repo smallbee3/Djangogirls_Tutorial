@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DjangoGirls Tutorial</title>
+{#    {% 라는 동적으로 생성되는 템플릿 태그. 장고에서 정적파일을 쓸때 주로 사용 #}
+{#    settings.py의 STATIC_URL = '/static/'에서 바꾸는데로 같이 바뀜.#}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{#    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">#}
+{#    <link rel="stylesheet" href="/static/css/blog.css">#}
+
+</head>
+<body>
+{#<div>{% url 'blog:post-list' %}</div>#}
+{#    예를 들어서 시험삼아 넣어보기#}
+    <div class="header">
+        <div class="container">
+{#            <h1><a href="{%  url 'post-list' %}">Django Girls Blog</a></h1>#}
+            <h1><a href="">Django Girls Blog</a></h1>
+        </div>
+    </div>
+    <div class="container">
+    {%  block content %}
+
+{#################################################}
+{#        여기가 확장하는 공간#}
+{#################################################}
+
+    {%  endblock %}
+    </div>
+</body>
+</html>
+
+
+
+
+
+{#        {% for post in posts %}#}
+{#        <div class="post">#}
+{#            <p class="post-date">published: {{ post.published_date }}</p>#}
+{#            <h2 class="post-title"><a href="/{{ post.pk }}">{{ post.title }}</a></h2>#}
+{##}
+{#            네임스페이스 없이 수업에서 한것#}
+{#            <h2 class="post-title"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h2>#}
+{#            <h2 class="post-title"><a href="{% url 'blog:post-detail' pk=post.pk %}">{{ post.title }}</a></h2>#}
+{#            <p class="post-content">{{ post.content|linebreaksbr|truncatewords:30 }}</p>#}
+{#            <button><a href="{% url 'blog:post-delete' pk=post.pk %}"></a>delete</button>#}
+{#        </div>#}
+{#        {% endfor %}#}

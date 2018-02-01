@@ -58,8 +58,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #써드파티 앱
+
+
     # 우리가 새로 만든 'blog'패키지가
     # Django의 application으로 동작하도록 등록해 줌
+    # 커스텀 앱
     'blog',
 ]
 

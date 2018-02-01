@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# 주석처리가 아니라 shell-script언어.
+
 import os
 import sys
 

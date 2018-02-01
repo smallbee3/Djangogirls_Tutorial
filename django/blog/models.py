@@ -3,13 +3,18 @@ from django.utils import timezone
 
 
 class Post(models.Model):
+
+    # id = models.AutoField()
+    # 자동으로 생성되는 부분
+    # -> 나중에 필요하면 커스텀으로 할 수 있다.
+
     author = models.ForeignKey(
         'auth.User',
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True)
-    content_date = models.DateTimeField(
+    created_date = models.DateTimeField(
         default=timezone.now
     )
     published_date = models.DateTimeField(
